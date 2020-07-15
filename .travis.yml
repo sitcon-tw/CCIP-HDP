@@ -6,7 +6,7 @@ branches:
   only:
   - master
 before_deploy:
-  - npm run build
+  - BASE_URL=/CCIP-HDP npm run build
 deploy:
   provider: pages
   skip_cleanup: true
