@@ -1,6 +1,6 @@
 ---
 title: COSCUP 2020 COVID-19 健康聲明
-endpoint: https://hd.sitcon.party
+endpoint: https://hd.sitcon.party/
 fields:
   - label:
       en: Nickname
