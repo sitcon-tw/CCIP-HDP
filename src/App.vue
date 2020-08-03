@@ -2,12 +2,13 @@
   <div id="app">
     <Navbar v-if="$route.meta.type === 'Step'" />
     <router-view class="view-port" />
+    <Loading v-if="loading" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Action } from "vuex-class";
+import { Action, Getter } from "vuex-class";
 
 import metadataParser from "markdown-yaml-metadata-parser";
 
@@ -20,10 +21,13 @@ import { DeclarationState } from "@/store/types/declaration.type";
 import { FormState } from "@/store/types/form.type";
 
 import rawHDP from "@/../template/HDP.md";
+
 import Navbar from "@/components/Navbar.vue";
+import Loading from "@/components/Loading.vue";
 
 @Component({
   components: {
+    Loading,
     Navbar
   }
 })
@@ -44,6 +48,9 @@ export default class App extends Vue {
 
   @Action("setFields", { namespace: "form" })
   private setFields!: (data: FormState["data"]) => void;
+
+  @Getter("loading", { namespace: "app" })
+  private loading!: boolean;
 
   private created(): void {
     const HDP = metadataParser(rawHDP);
